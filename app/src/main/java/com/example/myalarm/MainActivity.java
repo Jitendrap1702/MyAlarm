@@ -22,6 +22,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.text.DateFormat;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import android.content.pm.PackageManager.NameNotFoundException;
 
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     ActivityMainBinding b;
 //    Ringtone ringtone;
     String[] weekDays = {"0","0","0","0","0","0","0"};
+    private AlarmManager alarmManager;
+    PendingIntent pendingIntent;
+    Intent intent;
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -44,11 +49,18 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
+//        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        intent = new Intent(this, AlertReceiver.class);
+//        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//
+
         b.setAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
+//                DialogFragment timePicker = new TimePickerFragment();
+//                timePicker.show(getSupportFragmentManager(), "time picker");
+                startAlarm();
+                startAlarm2();
 
             }
         });
@@ -66,50 +78,166 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        c.set(Calendar.SECOND, 0);
+//        Calendar c = Calendar.getInstance();
+//        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//        c.set(Calendar.MINUTE, minute);
+//        c.set(Calendar.SECOND, 0);
 
-        if (weekDays[0].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
-        }
-        if (weekDays[1].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
-        }
-        if (weekDays[2].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
-        }
-        if (weekDays[3].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
-        }
-        if (weekDays[4].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
-        }
-        if (weekDays[5].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
-        }
-        if (weekDays[6].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
-        }
+//        if (weekDays[0].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        if (weekDays[1].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        if (weekDays[2].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        if (weekDays[3].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        if (weekDays[4].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        if (weekDays[5].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        if (weekDays[6].equals("1")){
+//            Calendar c = Calendar.getInstance();
+//            c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+//            c.set(Calendar.MINUTE, minute);
+//            c.set(Calendar.SECOND, 0);
+//            c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+//            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//            Intent intent = new Intent(this, AlertReceiver.class);
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),7*24*60*60*1000,pendingIntent);
+//            updateTimeText(c);
+//            startAlarm(c);
+//
+//        }
+//        String text = b.timeTV.getText().toString();
+//        Calendar updateTime = Calendar.getInstance();
+//        updateTime.setTimeZone(TimeZone.getTimeZone("GMT"));
+//        updateTime.set(Calendar.HOUR_OF_DAY, 11);
+//        updateTime.set(Calendar.MINUTE, 45);
+//
+//        Intent downloader = new Intent(getApplicationContext(), AlertReceiver.class);
+//        PendingIntent recurringDownload = PendingIntent.getBroadcast(getApplicationContext(),
+//                0, downloader, PendingIntent.FLAG_CANCEL_CURRENT);
+//        AlarmManager alarms = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+//        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+//                updateTime.getTimeInMillis(),
+//                AlarmManager.INTERVAL_DAY, recurringDownload);
 
-        updateTimeText(c);
-        startAlarm(c);
-
-        new AlertDialog.Builder(this).setMessage(c.toString()).show();
+//        updateTimeText(c);
+//        startAlarm(c);
+        //new AlertDialog.Builder(this).setMessage(c.toString()).show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void startAlarm(Calendar c) {
+    private void startAlarm( ) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 20);
+        cal.set(Calendar.MINUTE, 30);
+        cal.set(Calendar.SECOND, 0);
+//        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        intent = new Intent(this, AlertReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if (c.before(Calendar.getInstance())) {
-            c.add(Calendar.DATE, 1);
+        if (cal.before(Calendar.getInstance())) {
+            cal.add(Calendar.DATE, 1);
         }
-        alarmManager.setExact(RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-        alarmManager.setRepeating(RTC_WAKEUP,c.getTimeInMillis(),24*60*60*1000,pendingIntent);
+        //alarmManager.setInexactRepeating(RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY*7, pendingIntent);
+        //alarmManager.setExact(RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),2*60*1000,pendingIntent);
+        alarmManager.setExact(RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void startAlarm2() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 20);
+        cal.set(Calendar.MINUTE, 35);
+        cal.set(Calendar.SECOND, 0);
+//        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        intent = new Intent(this, AlertReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        if (cal.before(Calendar.getInstance())) {
+            cal.add(Calendar.DATE, 1);
+        }
+        //alarmManager.setInexactRepeating(RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY*7, pendingIntent);
+//        alarmManager.setExact(RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),2*60*1000,pendingIntent);
+        alarmManager.setExact(RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
     }
 
     private void updateTimeText(Calendar c) {
