@@ -2,8 +2,10 @@ package com.example.myalarm;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -13,9 +15,11 @@ public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
     private NotificationManager mManager;
+    private Context base;
 
     public NotificationHelper(Context base) {
         super(base);
+        this.base = base;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel();
         }
@@ -35,9 +39,15 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannelNotification() {
-        return new NotificationCompat.Builder(getApplicationContext(), channelID)
+        NotificationCompat.Builder mBuilder= new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setContentTitle("Attendance Reminder!")
                 .setContentText("Mark your attendance please..")
                 .setSmallIcon(R.drawable.ic_launcher_foreground);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(base,1,new Intent(base,MainActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(contentIntent);
+
+
+        return mBuilder;
     }
 }
