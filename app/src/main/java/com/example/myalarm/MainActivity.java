@@ -72,25 +72,25 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         c.set(Calendar.SECOND, 0);
 
         if (weekDays[0].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,1);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
         }
         if (weekDays[1].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,2);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
         }
         if (weekDays[2].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,3);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
         }
         if (weekDays[3].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,4);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
         }
         if (weekDays[4].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,5);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
         }
         if (weekDays[5].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,6);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
         }
         if (weekDays[6].equals("1")){
-            c.set(Calendar.DAY_OF_WEEK,7);
+            c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
         }
 
         updateTimeText(c);
