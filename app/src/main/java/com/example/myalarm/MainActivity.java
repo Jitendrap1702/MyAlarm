@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
             @Override
             public void onClick(View v) {
                 cancelAlarm();
+                cancelAlarm2();
             }
         });
 
@@ -203,8 +204,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void startAlarm( ) {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 10);
-        cal.set(Calendar.MINUTE, 15);
+        cal.set(Calendar.HOUR_OF_DAY, 11);
+        cal.set(Calendar.MINUTE, 3);
         cal.set(Calendar.SECOND, 0);
 //        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -223,8 +224,8 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void startAlarm2() {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 10);
-        cal.set(Calendar.MINUTE, 20);
+        cal.set(Calendar.HOUR_OF_DAY, 11);
+        cal.set(Calendar.MINUTE, 6);
         cal.set(Calendar.SECOND, 0);
 //        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -250,6 +251,16 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        alarmManager.cancel(pendingIntent);
+        b.timeTV.setText("Alarm canceled");
+
+//        ringtone.stop();
+    }
+
+    private void cancelAlarm2() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
         b.timeTV.setText("Alarm canceled");
 
