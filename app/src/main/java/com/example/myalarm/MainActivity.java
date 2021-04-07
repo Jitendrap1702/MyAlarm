@@ -203,41 +203,41 @@ public class MainActivity extends AppCompatActivity implements TimePickerDialog.
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void startAlarm( ) {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 20);
-        cal.set(Calendar.MINUTE, 30);
+        cal.set(Calendar.HOUR_OF_DAY, 10);
+        cal.set(Calendar.MINUTE, 15);
         cal.set(Calendar.SECOND, 0);
 //        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        intent = new Intent(this, AlertReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if (cal.before(Calendar.getInstance())) {
+        /*if (cal.before(Calendar.getInstance())) {
             cal.add(Calendar.DATE, 1);
-        }
+        }*/
         //alarmManager.setInexactRepeating(RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY*7, pendingIntent);
         //alarmManager.setExact(RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),2*60*1000,pendingIntent);
-        alarmManager.setExact(RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+//        alarmManager.setExact(RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void startAlarm2() {
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 20);
-        cal.set(Calendar.MINUTE, 35);
+        cal.set(Calendar.HOUR_OF_DAY, 10);
+        cal.set(Calendar.MINUTE, 20);
         cal.set(Calendar.SECOND, 0);
 //        c.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        intent = new Intent(this, AlertReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 2, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        if (cal.before(Calendar.getInstance())) {
+        /*if (cal.before(Calendar.getInstance())) {
             cal.add(Calendar.DATE, 1);
-        }
+        }*/
         //alarmManager.setInexactRepeating(RTC_WAKEUP, c.getTimeInMillis(), INTERVAL_DAY*7, pendingIntent);
 //        alarmManager.setExact(RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),2*60*1000,pendingIntent);
-        alarmManager.setExact(RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+//        alarmManager.setExact(RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
     }
 
     private void updateTimeText(Calendar c) {
